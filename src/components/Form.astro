@@ -1,0 +1,89 @@
+---
+---
+
+<form action="">
+	<h1>Contact Us</h1>
+	<p>
+		Required fields are followed by
+		<strong>
+			<span aria-label="required">*
+			</span>
+		</strong>
+	</p>
+	
+	<div class="contact-info">
+		<p class="field">
+			<label for="firstname">First Name 
+				<span aria-label="required">
+				*
+			</span>
+			</label>
+			<input type="text" name="firstname" id="firstname" required/>
+		</p>
+		
+		<p class="field">
+
+			<label for="lastname">Last Name 
+				<span aria-label="required">*
+				</span>
+			</label>
+			<input type="text" name="lastname" id="lastname" required>
+		</p>
+
+		<p class="field">
+			<label for="email">Email Address 
+				<span aria-label="required">*
+				</span>
+			</label>
+			<input type="email" name="email" id="email" required>
+		</p>
+	</div>
+
+	<section class="query">
+		<h2>Query Type 
+			<span aria-label="required">*
+			</span>
+		</h2>
+		<label for="option_1">
+			<input type="radio" name="query-type" id="option_1">
+			General Enquiry
+		</label>
+		<label for="option_2">
+			<input type="radio" name="query-type" id="option_2">
+			Support Request
+		</label>
+		<p>
+			<label for="message">
+				Message
+				<span aria-label="required">*
+				</span>
+			</label>
+			<textarea name="message" id="message" cols="40" rows="10"></textarea>
+		</p>
+	</section>
+
+	<p>
+		<input type="checkbox" name="consent" id="consent"/>
+		<label for="consent">I consent to being contacted by the team
+			<span aria-label="required">*
+			</span>
+		</label>
+	</p>
+</form>
+
+<style lang="sass">
+	@mixin layout($gap: 0)
+		display: flex
+		flex-direction: column
+		@if $gap != 0
+			gap: $gap
+	
+	.contact-info, .field, .query
+		@include layout
+	
+	.contact-info
+		gap: 1em
+	
+	.field
+		gap: 9px
+</style>
