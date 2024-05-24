@@ -10,9 +10,8 @@ const { title } = Astro.props;
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
+		<meta name="description" content="contact form" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
@@ -21,22 +20,24 @@ const { title } = Astro.props;
 	</body>
 </html>
 
-<style is:global>
+<style is:global lang="sass">
+	@use 'src/styles/colors'
 
-	@font-face {
-		font-family: 'Karla';
-		src: url('/fonts/Karla-VariableFont_wght.ttf') format('ttf');
-		font-weight: 400;
-	}
+	@font-face
+		font-family: 'Karla'
+		src: url('/fonts/Karla-VariableFont_wght.ttf') format('ttf')
+		font-weight: 400
 
-	*, *::before, *::after {
-		box-sizing: border-box;
-		margin: 0;
-		padding: 0;
-	}
+	*, *::before, *::after
+		box-sizing: border-box
+		margin: 0
+		padding: 0
 
-	body {
-		font-family: 'Karla', sans-serif;
-		min-height: 100svh;
-	}
+	body
+		display: grid
+		align-content: center
+		padding-inline: 1em
+		font-family: 'Karla', sans-serif
+		min-height: 100svh
+		background-color: colors.$light-green
 </style>
