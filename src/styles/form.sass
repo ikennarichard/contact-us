@@ -1,0 +1,134 @@
+@use 'colors'
+
+@mixin flex-col($gap: '3px')
+  display: flex
+  flex-direction: column
+  @if $gap != 0
+    gap: #{$gap}em
+
+%input-def
+  padding: 12px
+  border:  1px solid colors.$medium-grey
+  border-radius: 6px
+
+%label-def
+  font-size: 0.9rem
+  // font-weight: 600
+  color: colors.$dark-grey
+
+%asterisk-def
+  font-size: 0.8rem
+  margin-inline-start: 5px
+  color: colors.$green
+
+form
+  background-color: colors.$white
+  width: 100%
+  max-width: 800px
+  margin-inline: auto
+  margin-block-start: 1em
+  padding: 1em
+  border-radius: 6px
+  color: colors.$green
+
+  .sub-heading
+    font-size: 0.8rem
+    margin-block-start: 1.5px
+    color: colors.$dark-grey
+    strong > span
+      @extend %asterisk-def
+
+  label
+    @extend %label-def
+  
+  .text-errors
+    color: colors.$red
+  
+  .contact-info
+    @include flex-col(0.8)
+    margin-block-start: 1.2em
+    .field
+      @include flex-col(0.5)
+      span
+        @extend %asterisk-def
+      input
+        @extend %input-def  
+      input:focus
+        border: 0
+        outline: 1px solid colors.$green
+  
+  .query
+    @include flex-col(1)
+    margin-block-start: 1.2em
+    .query-type-heading
+      @extend %label-def
+      span
+        @extend %asterisk-def
+    label:not(:nth-child(1))
+      @extend %input-def
+      display: flex
+      gap: 0.5em
+      position: relative
+      input
+        appearance: none
+        border-radius: 50%
+        width: 16px
+        height: 16px
+        border: 1px solid colors.$green
+    label:not(:nth-child(1)):before
+      content: url('images/icon-radio-selected.svg')
+      position: absolute
+      top: 12px
+      left: 12px
+      visibility: hidden
+    label:has(input:checked):before
+      visibility: visible
+    .query-type-message
+      label > span
+        @extend %asterisk-def
+      textarea
+        margin-block-start: 6px
+        border: 1px solid colors.$medium-grey
+        border-radius: 9px
+        resize: none
+        width: 100%
+      textarea:focus
+        border: 0
+        outline: 1px solid colors.$green
+  
+  .consent
+    label
+      display: flex
+      align-content: center
+      gap: 9px
+      position: relative
+      top: 6px
+      input
+        appearance: none
+        border-radius: 3px
+        width: 16px
+        height: 16px
+        border: 1px solid colors.$green
+    label:before
+      content: url('images/icon-checkbox-check.svg')
+      position: absolute
+      top: 0
+      left: 0
+      visibility: hidden
+    label:has(input:checked):before
+      visibility: visible
+  
+  button[type=submit]
+    appearance: none
+    border: none
+    border-radius: 9px
+    width: 100%
+    margin-block-start: 1.9em
+    background-color: colors.$green
+    color: colors.$white
+    padding: 1em
+    font-size: 1rem
+    text-transform: capitalize
+    cursor: pointer
+    &:hover
+      filter: brightness(1.2)
