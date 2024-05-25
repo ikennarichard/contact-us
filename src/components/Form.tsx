@@ -1,7 +1,6 @@
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import '../styles/form.sass';
 import { useState } from 'react';
-import {Image} from 'astro:assets';
 
 type Inputs = {
 	firstname: string;
