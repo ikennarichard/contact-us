@@ -32,7 +32,7 @@ return (
 				formSent && (
 					<div className='success-check'>
 						<div>
-							<b><img src="/public/images/icon-success-check.svg" />Message Sent</b>
+							<b><img src="images/icon-success-check.svg" />Message Sent</b>
 							<p>Thank you for completing the form. We'll be in touch soon!</p>
 						</div>
 				</div>)
