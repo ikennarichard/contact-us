@@ -19,7 +19,7 @@ export default function ContactForm() {
 		formState: {errors}
 	 } = useForm<Inputs>();
 
-	const onSubmit: SubmitHandler<Inputs> = (data) => {
+	const onSubmit: SubmitHandler<Inputs> = () => {
 		setFormSent(true)
 		setTimeout(() => {
 			setFormSent(false)
