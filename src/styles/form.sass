@@ -2,7 +2,7 @@
 
 @mixin flex-col($gap: '3px')
   display: flex
-  flex-direction: column
+  flex-flow: column wrap
   @if $gap != 0
     gap: #{$gap}em
 
@@ -12,8 +12,7 @@
   border-radius: 6px
 
 %label-def
-  font-size: 0.9rem
-  // font-weight: 600
+  font-size: 0.89rem
   color: colors.$dark-grey
 
 %asterisk-def
@@ -21,19 +20,54 @@
   margin-inline-start: 5px
   color: colors.$green
 
+@keyframes show
+  0%
+    opacity: 0
+    left: 18px
+
+  100%
+    opacity: 1
+    left: 0
+
+.success-check
+  position: fixed
+  z-index: 1
+  width: 100%
+  height: 100%
+  display: grid
+  left: 0
+  place-content: center
+  background-color:  #24242427
+  > div
+    background-color: colors.$dark-grey
+    border-radius: 9px
+    padding: 2em
+    color: colors.$white
+    position: relative
+    animation: 1s ease-in forwards show
+    b
+      display: flex
+      align-items: center
+      gap: 9px
+    p
+      font-size: 0.8rem
+      margin-block-start: 1em
+      color: colors.$light-grey
+
 form
   background-color: colors.$white
   width: 100%
-  max-width: 800px
+  max-width: 700px
   margin-inline: auto
   margin-block-start: 1em
-  padding: 1em
+  padding: 2em 1.5em
   border-radius: 6px
   color: colors.$green
 
   .sub-heading
     font-size: 0.8rem
-    margin-block-start: 1.5px
+    margin-block-start: 9px
+    margin-block-end: 2em
     color: colors.$dark-grey
     strong > span
       @extend %asterisk-def
@@ -43,20 +77,31 @@ form
   
   .text-errors
     color: colors.$red
+    font-size: 0.85rem
+    // margin-block-start: 3px
   
-  .contact-info
-    @include flex-col(0.8)
-    margin-block-start: 1.2em
-    .field
-      @include flex-col(0.5)
-      span
-        @extend %asterisk-def
-      input
-        @extend %input-def  
-      input:focus
-        border: 0
-        outline: 1px solid colors.$green
-  
+  .contact-container
+    container: contact-details / inline-size
+    .contact-info
+      display: grid
+      gap: 0.8em
+      margin-block-start: 1.2em
+      .field
+        @include flex-col(0.5)
+        span
+          @extend %asterisk-def
+        input
+          @extend %input-def
+        input[type=email]
+          width: 100%
+        input:focus
+          outline: 1px solid colors.$green
+  @container contact-details (min-width: 400px)
+    .contact-info
+      grid-template-areas: '. .' 'email email' 
+      .field:nth-child(3)
+          grid-area: email
+        
   .query
     @include flex-col(1)
     margin-block-start: 1.2em
@@ -64,25 +109,34 @@ form
       @extend %label-def
       span
         @extend %asterisk-def
-    label:not(:nth-child(1))
-      @extend %input-def
+    .query-type
       display: flex
-      gap: 0.5em
-      position: relative
-      input
-        appearance: none
-        border-radius: 50%
-        width: 16px
-        height: 16px
-        border: 1px solid colors.$green
-    label:not(:nth-child(1)):before
-      content: url('images/icon-radio-selected.svg')
-      position: absolute
-      top: 12px
-      left: 12px
-      visibility: hidden
-    label:has(input:checked):before
-      visibility: visible
+      gap: 1em
+      flex-wrap: wrap
+      justify-content: space-between
+      label
+        @extend %input-def
+        display: flex
+        align-items: center
+        padding: 12px
+        gap: 0.6em
+        position: relative
+        min-width: 200px
+        flex: 1
+        input
+          appearance: none
+          border-radius: 50%
+          width: 16px
+          height: 16px
+          border: 1px solid colors.$green
+      label:before
+        content: url('images/icon-radio-selected.svg')
+        position: absolute
+        top: 12px
+        left: 12px
+        visibility: hidden
+      label:has(input:checked):before
+        visibility: visible
     .query-type-message
       label > span
         @extend %asterisk-def
@@ -92,8 +146,8 @@ form
         border-radius: 9px
         resize: none
         width: 100%
+        padding: 1em
       textarea:focus
-        border: 0
         outline: 1px solid colors.$green
   
   .consent
@@ -109,6 +163,8 @@ form
         width: 16px
         height: 16px
         border: 1px solid colors.$green
+      span
+        @extend %asterisk-def
     label:before
       content: url('images/icon-checkbox-check.svg')
       position: absolute
@@ -126,9 +182,11 @@ form
     margin-block-start: 1.9em
     background-color: colors.$green
     color: colors.$white
+    font-weight: bold
     padding: 1em
     font-size: 1rem
     text-transform: capitalize
     cursor: pointer
+    transition: 0.2s background-color linear
     &:hover
-      filter: brightness(1.2)
+      background-color: hsl(169, 82%, 10%)
