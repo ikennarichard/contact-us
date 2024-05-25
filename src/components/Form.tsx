@@ -132,8 +132,8 @@ return (
 									/>
 									Support Request
 							</label>
-							{errors.query ? <p className="text-errors">{errors.query?.message}</p> : null}
 						</div>
+						{errors.query ? <p className="text-errors">{errors.query?.message}</p> : null}
 			
 					<p className='query-type-message'>
 						<label htmlFor="message">
